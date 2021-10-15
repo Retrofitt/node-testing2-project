@@ -2,6 +2,7 @@ const server = require('../server')
 const request = require('supertest')
 const db = require('../../data/dbConfig')
 
+
 beforeAll(async()=>{
     await db.migrate.rollback()
     await db.migrate.latest()
@@ -31,7 +32,7 @@ describe('[GET] returns all testSubjects', ()=>{
 describe('[POST] Creates testSubject into database', ()=>{
     let res
     beforeEach(async () => {
-        res = await request(server).post('/')
+        res = await request(server).post('/').send({name:'testSubject4'})
         })
     it('creates a new user', async()=>{
         const newTestSubjects = await db('testSubjects')
